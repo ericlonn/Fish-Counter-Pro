@@ -7,5 +7,6 @@ public class FishType : ScriptableObject
 {
     public Sprite fishSprite;
     public float speed;
+    public int pointValue;
 
 }

@@ -5,4 +5,9 @@ using UnityEngine;
 public class FishInputAttach : MonoBehaviour
 {
     public FishType fishType;
+
+    private void Update()
+    {
+        GetComponent<SpriteRenderer>().sprite = fishType.fishSprite;
+    }
 }

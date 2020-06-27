@@ -10,6 +10,7 @@ public class FishBehavior : MonoBehaviour
     public float swaySpeed;
     public float swayAmount;
 
+    public bool counted = false;
 
     private float initialYPos;
     private float swayRange;
@@ -33,10 +34,22 @@ public class FishBehavior : MonoBehaviour
         transform.Translate(currentMove);
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.gameObject.tag == "LevelBoundaries") {
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "LevelBoundaries")
+        {
             Destroy(gameObject);
         }
-        Debug.Log("OUT");
+    }
+
+    public void CountFish()
+    {
+        counted = true;
+        Color materialColor = GetComponent<SpriteRenderer>().material.color;
+        materialColor = new Color(1f,1f,1f,.5f);
+        GetComponent<SpriteRenderer>().material.color = materialColor;
+
+        FindObjectOfType<ScoreKeeper>().score += fishType.pointValue;
+        
     }
 }

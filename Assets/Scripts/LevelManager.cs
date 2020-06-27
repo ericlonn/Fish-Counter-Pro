@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             if (i > fishSpawner.fishFreqs.Count) { break; }
-            attachPoints[i].GetComponent<SpriteRenderer>().sprite = fishSpawner.fishFreqs[i].fishType.fishSprite;
+            attachPoints[i].GetComponent<FishInputAttach>().fishType = fishSpawner.fishFreqs[i].fishType;
         }
     }
 

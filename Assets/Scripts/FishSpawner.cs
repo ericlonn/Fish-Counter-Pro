@@ -39,6 +39,7 @@ public class FishSpawner : MonoBehaviour
         newFish.transform.position = new Vector2(newFish.transform.position.x, newFish.transform.position.y + spawnRandomYPos);
         newFish.GetComponent<SpriteRenderer>().sprite = newFishType.fishSprite;
         newFish.GetComponent<FishBehavior>().speed = newFishType.speed;
+        newFish.GetComponent<FishBehavior>().fishType = newFishType;
 
     }
 
