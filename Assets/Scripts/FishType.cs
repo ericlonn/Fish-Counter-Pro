@@ -6,7 +6,7 @@ using UnityEngine;
 public class FishType : ScriptableObject
 {
     public Sprite fishSprite;
-    public float speed;
-    public int pointValue;
+    public float spriteScale = 1;
+    public float speed = 3;
 
 }

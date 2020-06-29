@@ -10,7 +10,6 @@ public class InputManager : MonoBehaviour
     void Update()
     {
 
-
         if (Input.GetKeyDown(KeyCode.UpArrow) && attachPoints[0].GetComponent<FishInputAttach>().fishType != null)
         {
             CountFish(0);
@@ -60,14 +59,15 @@ public class InputManager : MonoBehaviour
                     furthestRightFish = fishScript;
                 }
             }
-
             furthestRightFish.CountFish();
 
-            Debug.Log(furthestRightFish.name);
-        }
-        else
-        {
-            Debug.Log("no fish");
+            int indexForTally = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                if (FindObjectOfType<FishSpawner>().fishFreqs[i].fishType == furthestRightFish.fishType) { indexForTally = i; }
+            }
+            FindObjectOfType<ScoreKeeper>().AddToCounted(indexForTally);
+
         }
     }
 }

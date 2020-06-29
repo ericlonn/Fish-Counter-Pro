@@ -1,24 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class ScoreKeeper : MonoBehaviour
 {
+    int[] fishTotal = new int[4];
+    int[] fishCounted = new int[4];
+    int miscounts = 0;
 
-    public int score = 0;
+    public TextMeshProUGUI[] textElementsTotal = new TextMeshProUGUI[4];
+    public TextMeshProUGUI[] textElementsCounted = new TextMeshProUGUI[4];
+    public TextMeshProUGUI miscountTMP;
 
-    public Text scoreText;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        
+        RefreshUIElements();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddToTotal(int fishID) { fishTotal[fishID]++; }
+
+    public void AddToCounted(int fishID) { fishCounted[fishID]++; }
+
+    public void AddToMiscounts() { miscounts++; }
+
+    void RefreshUIElements()
     {
-        scoreText.text = score.ToString();
+        for (int i = 0; i < 4; i++)
+        {
+            textElementsTotal[i].text = fishTotal[i].ToString();
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            textElementsCounted[i].text = fishCounted[i].ToString();
+        }
+
+
     }
 }

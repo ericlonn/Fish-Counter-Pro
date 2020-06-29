@@ -9,6 +9,7 @@ public class FishSpawner : MonoBehaviour
     public float spawnRange = 10f;
     public float spawnFrequency = 1f;
     public List<FishFreq> fishFreqs = new List<FishFreq>();
+    public bool activated = true;
 
     private float spawnTimer = 0f;
 
@@ -21,13 +22,17 @@ public class FishSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawnTimer += Time.deltaTime;
-
-        if (spawnTimer > spawnFrequency)
+        if (activated)
         {
-            SpawnFish();
-            spawnTimer = 0f;
+            spawnTimer += Time.deltaTime;
+
+            if (spawnTimer > spawnFrequency)
+            {
+                SpawnFish();
+                spawnTimer = 0f;
+            }
         }
+
     }
 
     void SpawnFish()
@@ -40,6 +45,17 @@ public class FishSpawner : MonoBehaviour
         newFish.GetComponent<SpriteRenderer>().sprite = newFishType.fishSprite;
         newFish.GetComponent<FishBehavior>().speed = newFishType.speed;
         newFish.GetComponent<FishBehavior>().fishType = newFishType;
+        newFish.transform.localScale = new Vector3(newFishType.spriteScale, newFishType.spriteScale, newFishType.spriteScale);
+
+        int indexForTally = 0;
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (fishFreqs[i].fishType == newFishType){ indexForTally = i; }   
+        }
+
+        FindObjectOfType<ScoreKeeper>().AddToTotal(indexForTally);
+        Debug.Log(indexForTally);
 
     }
 
@@ -71,10 +87,10 @@ public class FishSpawner : MonoBehaviour
         float lineDistance = 15f;
         Gizmos.color = Color.red;
         Gizmos.DrawLine(
-            new Vector2(transform.position.x, transform.position.y + spawnRange), 
+            new Vector2(transform.position.x, transform.position.y + spawnRange),
             new Vector2(transform.position.x + lineDistance, transform.position.y + spawnRange));
         Gizmos.DrawLine(
-            new Vector2(transform.position.x, transform.position.y - spawnRange), 
+            new Vector2(transform.position.x, transform.position.y - spawnRange),
             new Vector2(transform.position.x + lineDistance, transform.position.y - spawnRange));
     }
 }

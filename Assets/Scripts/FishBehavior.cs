@@ -48,8 +48,6 @@ public class FishBehavior : MonoBehaviour
         Color materialColor = GetComponent<SpriteRenderer>().material.color;
         materialColor = new Color(1f,1f,1f,.5f);
         GetComponent<SpriteRenderer>().material.color = materialColor;
-
-        FindObjectOfType<ScoreKeeper>().score += fishType.pointValue;
         
     }
 }
